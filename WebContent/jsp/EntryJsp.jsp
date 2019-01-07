@@ -19,6 +19,7 @@ div {
 </head>
 <body>
 	<div>
+	<h1>謹賀新年</h1>
 		<h1>ログイン</h1>
 		<form action="http://localhost:8080/ECSite/login" method="post">
 			<table>
