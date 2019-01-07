@@ -20,6 +20,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
+		System.out.println("Hello");
+
 		req.setCharacterEncoding("UTF-8");
 		String name =req.getParameter("name");
 		String pass =req.getParameter("pass");
