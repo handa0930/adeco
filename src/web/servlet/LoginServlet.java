@@ -1,6 +1,7 @@
 package web.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import web.logic.CartItemBean;
 import web.logic.LoginLogic;
 
 
@@ -19,8 +21,6 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-
-		System.out.println("Hello");
 
 		req.setCharacterEncoding("UTF-8");
 		String name =req.getParameter("name");
@@ -39,7 +39,10 @@ public class LoginServlet extends HttpServlet {
 		if(login.isLogin(name,pass)) {
 			HttpSession session = req.getSession(true);
 			session.setAttribute("user",login.getUser());
-			req.setAttribute("catgoryList", login.getCategoryList());
+			session.setAttribute("catgoryList", login.getCategoryList());
+			// カートの生成
+			ArrayList<CartItemBean> cartList = new ArrayList<CartItemBean>();
+			session.setAttribute("CartList", cartList);
 			RequestDispatcher rd = req.getRequestDispatcher("jsp/SearchJsp.jsp");
 			rd.forward(req, resp);
 			return;

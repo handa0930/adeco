@@ -1,0 +1,82 @@
+.midashi{
+display: block;
+font-family:sans-serif;
+weight:bolder;
+color:#0066bf;
+background:#FFCCCC;
+padding:0.2em;
+margin-bottom:0.2em;
+font-size:300%;
+border:7px solid #0066bf;
+border-left:0;
+border-right: 0;
+}
+
+.cp_iptxt {
+	position: relative;
+	width: 80%;
+	/* margin: 40px 3%; */
+}
+.cp_iptxt input[type='text'] {
+	font: 20px/24px sans-serif;
+	box-sizing: border-box;
+	width: 80%;
+	padding: 0.3em;
+	letter-spacing: 1px;
+	color: #000000;
+	border: 1px solid #1b2538;
+	border-radius: 4px;
+}
+.ef input[type='text']:focus {
+	border: 1px solid #f8811f;
+	outline: none;
+	box-shadow: 0 0 10px 1px rgba(218,60,65, .5);
+}
+
+
+.cp_ipcheck {
+	position: relative;
+	width: 20%;
+
+}
+.cp_ipcheck input[type='text'] {
+	box-sizing: border-box;
+	width: 40%;
+	padding: 0.5em;
+	border: 1px solid #1b2538;
+	border-radius: 1px;
+}
+
+.bluebutton {
+  display       : inline-block;
+  border-radius : 9%;          /* 角丸       */
+  font-size     : 28pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 9px 21px;   /* 余白       */
+  background    : #1a1aff;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  box-shadow    : 2px 2px 3px #666666;  /* 影の設定 */
+}
+.bluebutton:hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+}
+
+.blue2button {
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 22pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 5px 12px;   /* 余白       */
+  background    : #6666ff;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  box-shadow    : 2px 2px 3px #666666;  /* 影の設定 */
+}
+.blue2button:hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+}

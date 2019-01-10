@@ -4,36 +4,44 @@
 <%@page import="java.util.ArrayList" %>
 <html>
 <head>
-<style>
-
-div {
-	padding: 10px;
-	text-align: center;
-	text-align: center;
-	margin: 30px auto;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/ECSite/css/entrytop.css">
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/ECSite/css/button.css">
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/ECSite/css/title.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Search</title>
 </head>
 <body>
 
-	<% ArrayList<String> list = (ArrayList<String>)request.getAttribute("catgoryList"); %>
-	<div>
-	<h1>検索</h1>
+<%@ include file = "HelloJsp.jsp" %>
+
+<p class = "bana">
+<span class = "midashi">-Adecco-market-</span>
+</p>
+	<% ArrayList<String> list = (ArrayList<String>)session.getAttribute("catgoryList"); %>
+
+	<div class = "top">
+	<h1 class="plate" id="backer" align = "center">
+  	<span>商 品 を 検 索</span>
+	</h1>
+	</div>
+<div class = "second">
 		<form action="http://localhost:8080/ECSite/search" method="POST">
-			<input type="text" name="search" size="55%">
-				<br>
-				<br>
-					<p>カテゴリ
-					<select name="category">
-					<option value=""></option>
-						<% for(String s : list){ %>
-		  				<option value="<%= s %>"><%= s %></option>
+			<p>カテゴリ：
+				<select name="category" class = "cp_ipcheck">
+				<option value=""></option>
+					<% for(String s : list){ %>
+		  			<option value="<%= s %>"><%= s %></option>
 					<% } %>
-						</select>
-					</p>
-			<input type="submit" value="検索">
+				</select>
+			</p>
+			<p class="cp_iptxt">
+			<label class="ef">
+			<input type="text" name="search">
+
+			</label>
+			</p>
+			<input type="submit" value="検索する" class="bluebutton">
+
 		</form>
 	</div>
 

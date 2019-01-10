@@ -2,7 +2,7 @@ package web.logic;
 
 import java.io.Serializable;
 
-/* 作成者　上田 */
+/* 作成者　上田*/
 public class ItemBean implements Serializable {
 	static final long serialVersionUID = 2L;
 	private String name;//商品名
@@ -57,7 +57,8 @@ public class ItemBean implements Serializable {
 	}
 
 	public void setImg(String img) {
-		this.img = img;
+		this.img = "C:\\tools\\pleiades\\workspace\\ECSite\\WebContent\\img\\"+img;
+//		this.img = "../img/"+img;
 	}
 
 	public String getMsg() {

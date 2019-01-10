@@ -36,33 +36,17 @@ public class SearchServlet extends HttpServlet {
 			/*
 			 * 検索結果があった場合 検索された商品をID:Itemとしてリクエストオブジェクトに格納する その後検索結果表示ページに遷移する
 			 */
-			System.out.println("aa1");
-			req.setAttribute("Item", logic.getItemList());
-			System.out.println("aa2");
-			System.out.println(logic.getItemList().get(0).getName());
-
+			session.setAttribute("Item", logic.getItemList());
 			RequestDispatcher rd = req.getRequestDispatcher("jsp/SearchResultJsp.jsp");
-			System.out.println(rd);
-			System.out.println("aa3");
-
-			System.out.println(req);
-			System.out.println("----------------------");
-			System.out.println(resp);
-			System.out.println("----------------------");
 			rd.forward(req, resp);
-			System.out.println("aa4");
 
 			return;
 		} else {
 			/*
 			 * 検索結果が無かった場合、検索結果0件のページに遷移する
 			 */
-			System.out.println("bb1");
 			RequestDispatcher rd = req.getRequestDispatcher("jsp/NotItemSearchJsp.jsp");
-			System.out.println(rd);
-			System.out.println("bb2");
 			rd.forward(req, resp);
-			System.out.println("bb3");
 			return;
 		}
 

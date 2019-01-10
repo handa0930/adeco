@@ -36,7 +36,6 @@ public class LoginLogic {
 				String sName = rs.getString(2);
 				String sCode = rs.getString(3);
 				String sPass = rs.getString(4);
-
 				if (sName.equals(name) && sPass.equals(pass)) {
 					flag = true;
 					user.setUserID(sID);

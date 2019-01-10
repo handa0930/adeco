@@ -23,14 +23,22 @@ public class SearchLogic {
 		Statement st = null;
 		ResultSet rs = null;
 
+		// 検索ワードがあるか
+		Boolean isSearch = true;
+		// カテゴリ選択があるか
+		Boolean isCategory = true;
+		//検索ワードが設定されていなかった場合検索ワードをhogehogeに設定し検索ワードフラグを偽にする
 		String mSearch = search;
 		if (mSearch.equals("") || mSearch == null) {
 			mSearch = "hogehoge";
+			isSearch = false;
 		}
 
+		// カテゴリ選択が設定されていなかった場合カテゴリをhogehogeに設定しカテゴリ選択フラグを偽にする
 		String mCategory = category;
 		if (mCategory.equals("") || mCategory == null) {
 			mCategory = "hogehoge";
+			isCategory = false;
 		}
 
 		// DBに接続
@@ -38,9 +46,17 @@ public class SearchLogic {
 			Class.forName("com.mysql.jdbc.Driver");
 			cnct = DriverManager.getConnection(url, id, pw);
 			st = cnct.createStatement();
-			String query = "SELECT * FROM product INNER JOIN category ON product.cat_id = category.cat_id WHERE (product.pro_name LIKE '%"
+
+			String query;
+
+			// 検索ワードとカテゴリ選択が共に無かった場合全件検索する
+			if(!isSearch && !isCategory) {
+				query = "SELECT * FROM product INNER JOIN category ON product.cat_id = category.cat_id;";
+
+			}else {
+			query = "SELECT * FROM product INNER JOIN category ON product.cat_id = category.cat_id WHERE (product.pro_name LIKE '%"
 					+ mSearch + "%') OR (category.cat_name = '" + mCategory + "');";
-			System.out.println(query);
+			}
 			rs = st.executeQuery(query);
 			if (!rs.next()) {
 				return flag;
@@ -58,7 +74,7 @@ public class SearchLogic {
 				int sPrice = rs.getInt("product.pro_price");
 				item.setPrice(sPrice);
 
-				String sCategory = rs.getString("product.cat_id");
+				String sCategory = rs.getString("category.cat_name");
 				item.setCategory(sCategory);
 
 				String sImg = rs.getString("product.pro_img");

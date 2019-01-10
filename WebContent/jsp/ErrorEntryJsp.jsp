@@ -3,7 +3,16 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%--エラーアラートを表示後ログインページをインクルード --%>
+<html>
 <script>
 		alert("名前またはパスワードが\n一致しません");
 	</script>
+
+	<head>
+
+	</head>
+
+<body>
 	<%@ include file="EntryJsp.jsp" %>
+</body>
+	</html>
