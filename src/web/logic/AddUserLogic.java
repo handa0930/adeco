@@ -5,27 +5,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
-public class ChangePasswordLogic {
-	UserBean user;
+public class AddUserLogic {
 
-	// コンストラクタ
-	public ChangePasswordLogic(UserBean user) {
-		this.user = user;
-	}
+	public Boolean idAdd(String name, String pass, String rePass) {
+		Boolean flag = false;
 
-	// パスワードの変更を判定する
-	public Boolean Change(String oldPass, String newPass, String reNewPass) {
-
-		// パスワード変更が正常に終わったか
-		boolean flag = false;
-
-		// 入力されたパスワードが正しくなければ偽を返す
-		if (!user.getLoginPassword().equals(oldPass)) {
-			return flag;
-		}
-		// 新しいパスワードと確認用再入力パスワードが同じでなければ偽を返す
-		if (!newPass.equals(reNewPass)) {
+		// 入力されたパスワードと確認用再入力パスワードが同じでなければ偽を返す
+		if (!pass.equals(rePass)) {
 			return flag;
 		}
 
@@ -36,23 +25,41 @@ public class ChangePasswordLogic {
 
 		Connection cnct = null;
 		ResultSet rs = null;
+		Statement st = null;
 		PreparedStatement pst = null;
 
 		// DBに接続
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			cnct = DriverManager.getConnection(url, id, pw);
+			st = cnct.createStatement();
+			// select文
+			rs = st.executeQuery("SELECT * FROM user;");
+			int count = 1;
+			ArrayList<UserBean> users = new ArrayList<UserBean>();
+			while (rs.next()) {
+				UserBean user = new UserBean();
+				user.setUserName(rs.getString(2));
+				users.add(user);
+				count++;
+			}
+			for (UserBean u : users) {
+				if (u.getUserName().equals(name)) {
+					return flag;
+				}
+			}
+
+
 			// userテーブルのパスワードを更新する
-			String query = "UPDATE user SET login_pw = ? WHERE user_id = ?;";
+			String query = "INSERT INTO user VALUES(?,?,?,?);";
 			pst = cnct.prepareStatement(query);
-			pst.setString(1, newPass);
-			pst.setInt(2, user.getUserID());
+			pst.setInt(1, count);
+			pst.setString(2, name);
+			pst.setString(3, name);
+			pst.setString(4, pass);
 			pst.executeUpdate();
 			flag = true;
-			user.setLoginPassword(newPass);
 			return flag;
-
-
 		} catch (ClassNotFoundException ex) {
 			ex.printStackTrace();
 
@@ -70,6 +77,7 @@ public class ChangePasswordLogic {
 			} catch (Exception ex) {
 			}
 		}
+
 		return flag;
 	}
 
